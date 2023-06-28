@@ -5,7 +5,6 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 
 import { useTask } from '../context/taskProvider';
-
 import Modal from '../components/modal';
 import Task from '../components/task';
 import Add from '../components/add';
@@ -30,7 +29,7 @@ export default function Home() {
 
   return (
     <>
-      <main className="grid my-12 gap-6 xl:place-content-center lg:place-content-center md:px-56 sm:px-12 px-8">
+      <main className="grid my-16 gap-6 xl:place-content-center lg:place-content-center md:px-56 sm:px-12 px-8">
         <span className="text-[#685E52] flex flex-row items-center justify-start gap-2 xl:text-2xl lg:text-xl md:text-lg sm:text-lg text-lg">
           Date:
           <h1 className="text-[#685E52]/80">

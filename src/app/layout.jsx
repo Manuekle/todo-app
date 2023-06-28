@@ -1,6 +1,6 @@
 /* eslint-disable import/named */
 import './globals.css';
-
+import Footer from '../components/footer';
 import { taskProvider as TaskProvider } from '../context/taskProvider';
 
 export const metadata = {
@@ -13,6 +13,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className="font-cute">
         <TaskProvider>{children}</TaskProvider>
+        <Footer />
       </body>
     </html>
   );

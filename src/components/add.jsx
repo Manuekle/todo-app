@@ -14,7 +14,7 @@ function add({ open, setOpen }) {
       <span className="text-[#cb8ba4] xl:text-lg lg:text-lg md:text-base sm:text-base text-base">
         Add new task
       </span>
-      <span className="fill-[#cb8ba4]">
+      <span className="fill-[#cb8ba4] h-5 w-5">
         <Heart />
       </span>
     </button>
