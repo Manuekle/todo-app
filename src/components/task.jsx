@@ -1,14 +1,16 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React from 'react';
+
+import React, { useState } from 'react';
 import Checkbox from './checkbox';
 import Actions from './actions';
 
-function Task({ text }) {
+function Task({ id, task, isCheck }) {
+  const [isEdit, setIsEdit] = useState(false);
   return (
     <article className="flex flex-col gap-1">
       <span className="flex justify-between items-center">
-        <Checkbox text={text} />
-        <Actions />
+        <Checkbox task={task} isCheck={isCheck} isEdit={isEdit} />
+        <Actions id={id} isEdit={isEdit} setIsEdit={setIsEdit} />
       </span>
       <hr className="border rounded-full border-[#758FB9]/60" />
     </article>

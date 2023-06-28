@@ -17,3 +17,29 @@ body {
   background-size: 40px 40px;
   background-image: radial-gradient(circle, #000000 1px, rgba(0, 0, 0, 0) 1px);
 }
+
+/* scrollbar dark */
+::-webkit-scrollbar {
+  width: 6px;
+  background-color: #F8FAFC;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #DDE5F0;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #DDE5F0;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}

@@ -1,0 +1,35 @@
+/* eslint-disable import/no-extraneous-dependencies */
+/* eslint-disable react-hooks/rules-of-hooks */
+
+'use client';
+
+import React, { useState, createContext, useContext } from 'react';
+import { v4 as uuidv4 } from 'uuid';
+
+export const taskContext = createContext();
+
+export const useTask = () => {
+  const context = useContext(taskContext);
+  if (!context) {
+    throw new Error('useTask must be used within a TaskProvider');
+  }
+  return context;
+};
+
+export const taskProvider = ({ children }) => {
+  const [tasks, setTasks] = useState([]);
+
+  const createTask = (text, isChecked) => {
+    setTasks([...tasks, { id: uuidv4(), text, isChecked }]);
+  };
+
+  const deleteTask = (id) => {
+    setTasks(tasks.filter((task) => task.id !== id));
+  };
+
+  return (
+    <taskContext.Provider value={{ tasks, createTask, deleteTask }}>
+      {children}
+    </taskContext.Provider>
+  );
+};

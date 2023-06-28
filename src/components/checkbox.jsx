@@ -1,26 +1,33 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/rules-of-hooks */
 
 'use client';
 
 import { useState } from 'react';
 
-const checkbox = ({ text }) => {
-  const [isChecked, setIsChecked] = useState(false);
+const checkbox = ({ task, isCheck, isEdit }) => {
+  const [isChecked, setIsChecked] = useState(isCheck);
+
+  const [title, setTitle] = useState(task);
 
   const handleCheckboxChange = () => {
     setIsChecked(!isChecked);
   };
 
+  const handleChange = (e) => {
+    setTitle(e.target.value);
+  };
+
   return (
     <div className="flex items-center">
       <input
-        id="myCheckbox"
+        id={task}
         type="checkbox"
         checked={isChecked}
         onChange={handleCheckboxChange}
         className="hidden"
       />
-      <label htmlFor="myCheckbox" className="flex items-center cursor-pointer">
+      <label htmlFor={task} className="flex items-center cursor-pointer">
         <div className="relative">
           <div className="w-6 h-6 bg-white border border-gray-300 rounded-full shadow-sm transition duration-200 ease-in-out">
             {isChecked && (
@@ -43,7 +50,16 @@ const checkbox = ({ text }) => {
             isChecked ? 'line-through text-[#758FB9]/50' : ''
           }`}
         >
-          <h1 className="text-lg">{text}</h1>
+          {isEdit ? (
+            <input
+              type="text"
+              onChange={handleChange}
+              value={title}
+              className="text-lg outline-none bg-transparent border-none"
+            />
+          ) : (
+            <h1 className="text-lg">{task}</h1>
+          )}
         </span>
       </label>
     </div>
