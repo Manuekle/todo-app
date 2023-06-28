@@ -1,3 +1,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+@layer base {
+  @font-face {
+    font-family: 'Cute Love';
+    src: url('/fonts/Cute.ttf') format('truetype');
+    font-style:  normal;
+    font-weight: 100;
+    font-display: swap;
+  }
+}
+
+body {
+  background-size: 40px 40px;
+  background-image: radial-gradient(circle, #000000 1px, rgba(0, 0, 0, 0) 1px);
+}
