@@ -5,8 +5,13 @@ import Trash from '../../public/icons/trash';
 import Edit from '../../public/icons/edit';
 import Done from '../../public/icons/done';
 
-function actions({ id, isEdit, setIsEdit }) {
+function actions({ id, isEdit, setIsEdit, setToastRemove }) {
   const { deleteTask } = useTask();
+
+  const deleteHandler = () => {
+    deleteTask(id);
+    setToastRemove(true);
+  };
 
   return (
     <div className="flex items-center gap-2">
@@ -34,7 +39,7 @@ function actions({ id, isEdit, setIsEdit }) {
           </button>
           <button
             type="button"
-            onClick={() => deleteTask(id)}
+            onClick={deleteHandler}
             className="flex items-center border rounded-md p-1 bg-white hover:bg-[#CB8BA4]/10"
           >
             <span className="h-5 w-5">

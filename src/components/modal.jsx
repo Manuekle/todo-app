@@ -7,7 +7,7 @@ import Image from 'next/image';
 import { useTask } from '../context/taskProvider';
 import Normal from '../../public/images/normal.png';
 
-function modal({ setOpen }) {
+function modal({ setOpen, setToastSucces }) {
   const [task, setTask] = useState();
   const { createTask } = useTask();
 
@@ -19,6 +19,7 @@ function modal({ setOpen }) {
     e.preventDefault();
     createTask(task.text, false);
     setOpen(false);
+    setToastSucces(true);
   };
 
   return (

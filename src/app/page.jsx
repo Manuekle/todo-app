@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 
 import { useTask } from '../context/taskProvider';
+import Toast from '../components/toast';
 import Modal from '../components/modal';
 import Task from '../components/task';
 import Add from '../components/add';
@@ -12,11 +13,36 @@ import Complete from '../components/tasks/complete';
 import Empty from '../components/empty';
 import Cinnamoroll from '../../public/images/cinnamoroll.png';
 import Backstep from '../../public/images/backstep.png';
+import Love from '../../public/images/love.png';
+import Error from '../../public/images/error.png';
 
 export default function Home() {
   const { tasks } = useTask();
 
   const [open, setOpen] = useState(false);
+  const [toastSucces, setToastSucces] = useState(false);
+  const [toastRemove, setToastRemove] = useState(false);
+
+  const success = [
+    {
+      message: 'Task successfully added!',
+      card: 'border-[#bbc66f] bg-[#D4E07D] shadow-lg shadow-[#bbc66f]/30',
+      text: 'text-[#96a14d]',
+      hover: 'text-[#96a14d] hover:text-[#96a14d]/80',
+      image: Love,
+      alt: 'success'
+    }
+  ];
+  const remove = [
+    {
+      message: 'Task successfully deleted!',
+      card: 'border-[#f3bbd0] bg-[#FFC7DD] shadow-lg shadow-[#f3bbd0]/30',
+      text: 'text-[#cb8ba4]',
+      hover: 'text-[#cb8ba4] hover:text-[#cb8ba4]/80',
+      image: Error,
+      alt: 'remove'
+    }
+  ];
 
   // filter tasks by isChecked
   const completedTasks = tasks.filter((task) => task.isChecked);
@@ -29,6 +55,12 @@ export default function Home() {
 
   return (
     <>
+      {toastSucces && (
+        <Toast open={toastSucces} setOpen={setToastSucces} res={success} />
+      )}
+      {toastRemove && (
+        <Toast open={toastRemove} setOpen={setToastRemove} res={remove} />
+      )}
       <main className="grid my-16 gap-6 xl:place-content-center lg:place-content-center md:px-56 sm:px-12 px-8">
         <span className="text-[#685E52] flex flex-row items-center justify-start gap-2 xl:text-2xl lg:text-xl md:text-lg sm:text-lg text-lg">
           Date:
@@ -59,6 +91,7 @@ export default function Home() {
                   id={task.id}
                   task={task.text}
                   isCheck={task.isChecked}
+                  setToastRemove={setToastRemove}
                 />
               ))
             ) : (
@@ -89,7 +122,7 @@ export default function Home() {
             backdropFilter: 'blur(5px)'
           }}
         >
-          <Modal setOpen={setOpen} />
+          <Modal setOpen={setOpen} setToastSucces={setToastSucces} />
         </motion.div>
       )}
     </>

@@ -3,7 +3,7 @@
 
 'use client';
 
-import React, { useState, createContext, useContext } from 'react';
+import React, { useState, useEffect, createContext, useContext } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 export const taskContext = createContext();
@@ -17,7 +17,14 @@ export const useTask = () => {
 };
 
 export const taskProvider = ({ children }) => {
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState(() => {
+    const localData = localStorage.getItem('tasks');
+    return localData ? JSON.parse(localData) : [];
+  });
+
+  useEffect(() => {
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+  }, [tasks]);
 
   const createTask = (text, isChecked) => {
     setTasks([...tasks, { id: uuidv4(), text, isChecked }]);
