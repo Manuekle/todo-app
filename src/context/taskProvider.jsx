@@ -18,10 +18,12 @@ export const useTask = () => {
 };
 
 export const taskProvider = ({ children }) => {
-  const [tasks, setTasks] = useState(() => {
-    const localData = localStorage.getItem('tasks');
-    return localData ? JSON.parse(localData) : [];
-  });
+  // const [tasks, setTasks] = useState(() => {
+  //   const localData = localStorage.getItem('tasks');
+  //   return localData ? JSON.parse(localData) : [];
+  // });
+
+  const [tasks, setTasks] = useState([]);
 
   // useEffect(() => {
   //   localStorage.setItem('tasks', JSON.stringify(tasks));
