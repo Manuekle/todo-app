@@ -4,8 +4,8 @@ import Footer from '../components/footer';
 import { taskProvider as TaskProvider } from '../context/taskProvider';
 
 export const metadata = {
-  title: 'Task List',
-  description: 'A simple to do list'
+  title: 'Cute List',
+  description: 'A cute list app'
 };
 
 export default function RootLayout({ children }) {
