@@ -105,7 +105,7 @@ export default function Home() {
           </div>
           <div className="z-0 absolute right-0 bottom-0">
             <Image
-              className="z-0 object-cover xl:w-64 xl:h-64 lg:w-56 lg:h-56 md:w-40 md:h-40 sm:w-40 sm:h-40 w-36 h-36"
+              className="z-0 object-cover xl:w-64 xl:h-64 lg:w-56 lg:h-56 md:w-40 md:h-40 sm:w-40 sm:h-40 w-40 h-40"
               src={Backstep}
               alt="backstep"
             />
