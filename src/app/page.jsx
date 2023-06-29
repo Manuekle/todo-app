@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 
 import { useTask } from '../context/taskProvider';
 import Toast from '../components/toast';
+import Loader from '../components/loader';
 import Modal from '../components/modal';
 import Task from '../components/task';
 import Add from '../components/add';
@@ -22,6 +23,8 @@ export default function Home() {
   const [open, setOpen] = useState(false);
   const [toastSucces, setToastSucces] = useState(false);
   const [toastRemove, setToastRemove] = useState(false);
+
+  const [loading, setLoading] = useState(true);
 
   const success = [
     {
@@ -44,13 +47,15 @@ export default function Home() {
     }
   ];
 
-  // filter tasks by isChecked
   const completedTasks = tasks.filter((task) => task.isChecked);
 
   useEffect(() => {
     if (tasks.length > 0) {
       setOpen(false);
     }
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000);
   }, [tasks]);
 
   return (
@@ -83,8 +88,11 @@ export default function Home() {
           <div className="flex justify-end items-center pb-2">
             <Add open={open} setOpen={setOpen} />
           </div>
-          <div className="flex flex-col gap-8 border-[#758FB9]/30 border-2 rounded border-dashed p-6 h-80 overflow-y-auto">
-            {tasks.length > 0 ? (
+          <div className="bg-white/50 backdrop-opacity-50 z-10 relative flex flex-col gap-8 border-[#758FB9]/30 border-2 rounded border-dashed p-6 h-80 overflow-y-auto">
+            {loading && <Loader />}
+            {!loading && tasks.length === 0 && <Empty text="No assignments" />}
+            {!loading &&
+              tasks.length > 0 &&
               tasks.map((task) => (
                 <Task
                   key={task.id}
@@ -93,16 +101,15 @@ export default function Home() {
                   isCheck={task.isChecked}
                   setToastRemove={setToastRemove}
                 />
-              ))
-            ) : (
-              <Empty text="No assignments" />
-            )}
+              ))}
           </div>
-          <Image
-            className="object-cover absolute right-0 bottom-0 xl:w-64 xl:h-64 lg:w-56 lg:h-56 md:w-40 md:h-40 sm:w-40 sm:h-40 w-36 h-36"
-            src={Backstep}
-            alt="backstep"
-          />
+          <div className="z-0 absolute right-0 bottom-0">
+            <Image
+              className="z-0 object-cover xl:w-64 xl:h-64 lg:w-56 lg:h-56 md:w-40 md:h-40 sm:w-40 sm:h-40 w-36 h-36"
+              src={Backstep}
+              alt="backstep"
+            />
+          </div>
           <div className="absolute flex xl:bottom-20 xl:left-20 lg:bottom-16 lg:left-16 md:bottom-12 md:left-12 sm:bottom-12 sm:left-12 bottom-12 left-8">
             <Complete num={completedTasks.length} />
           </div>

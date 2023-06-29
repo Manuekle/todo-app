@@ -6,10 +6,11 @@ import Actions from './actions';
 
 function Task({ id, task, isCheck, setToastRemove }) {
   const [isEdit, setIsEdit] = useState(false);
+
   return (
     <article className="flex flex-col gap-1">
       <span className="flex justify-between items-center">
-        <Checkbox task={task} isCheck={isCheck} isEdit={isEdit} />
+        <Checkbox id={id} task={task} isCheck={isCheck} isEdit={isEdit} />
         <Actions
           id={id}
           isEdit={isEdit}
