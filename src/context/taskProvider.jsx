@@ -22,9 +22,9 @@ export const taskProvider = ({ children }) => {
     return localData ? JSON.parse(localData) : [];
   });
 
-  useEffect(() => {
-    localStorage.setItem('tasks', JSON.stringify(tasks));
-  }, [tasks]);
+  // useEffect(() => {
+  //   localStorage.setItem('tasks', JSON.stringify(tasks));
+  // }, [tasks]);
 
   const createTask = (text, isChecked) => {
     setTasks([...tasks, { id: uuidv4(), text, isChecked }]);
